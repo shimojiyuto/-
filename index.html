@@ -47,11 +47,21 @@
       background: #ddd;
       color: #999;
     }
+    /* メッセージのスタイル */
+    #message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #e91e63; /* ピンク系 */
+      white-space: pre-line; /* 改行対応 */
+    }
   </style>
 </head>
 <body>
 
   <img id="main-image" src="Gemini_Generated_Image_7xeoge7xeoge7xeo.png" alt="BOY or GIRL？" />
+  <p id="message">おめでとうございます！<br>女の子です！</p>
   <br />
   <button id="start-btn">性別確認</button>
 
@@ -62,10 +72,14 @@
     const startBtn = document.getElementById('start-btn');
     const mainImage = document.getElementById('main-image');
     const drumrollAudio = document.getElementById('drumroll-audio');
+    const message = document.getElementById('message');
 
     startBtn.addEventListener('click', () => {
       startBtn.disabled = true;
       startBtn.textContent = '発表中...';
+
+      // メッセージは非表示のまま
+      message.style.display = 'none';
 
       // ドラムロール再生開始
       drumrollAudio.currentTime = 0;
@@ -76,9 +90,12 @@
         mainImage.alt = "GIRL!";
         startBtn.style.display = 'none';
 
+        // メッセージ表示
+        message.style.display = 'block';
+
         // BGM停止（必要なら）
-        //drumrollAudio.pause();
-        //drumrollAudio.currentTime = 0;
+        // drumrollAudio.pause();
+        // drumrollAudio.currentTime = 0;
       }, 5800);
     });
   </script>
