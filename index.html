@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>ジェンダーリビールサイト</title>
+
+  <!-- ネタバレ防止のためのmetaタグ -->
+  <meta name="description" content="ジェンダーリビールサイトです。性別はボタンを押してからのお楽しみ！" />
+  <meta property="og:title" content="ジェンダーリビールサイト" />
+  <meta property="og:description" content="性別はボタンを押してからのお楽しみ！" />
+
   <style>
     body {
       text-align: center;
@@ -47,21 +53,11 @@
       background: #ddd;
       color: #999;
     }
-    /* メッセージのスタイル */
-    #message {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #e91e63; /* ピンク系 */
-      white-space: pre-line; /* 改行対応 */
-    }
   </style>
 </head>
 <body>
 
   <img id="main-image" src="Gemini_Generated_Image_7xeoge7xeoge7xeo.png" alt="BOY or GIRL？" />
-  <p id="message">おめでとうございます！<br>女の子です！</p>
   <br />
   <button id="start-btn">性別確認</button>
 
@@ -72,16 +68,11 @@
     const startBtn = document.getElementById('start-btn');
     const mainImage = document.getElementById('main-image');
     const drumrollAudio = document.getElementById('drumroll-audio');
-    const message = document.getElementById('message');
 
     startBtn.addEventListener('click', () => {
       startBtn.disabled = true;
       startBtn.textContent = '発表中...';
 
-      // メッセージは非表示のまま
-      message.style.display = 'none';
-
-      // ドラムロール再生開始
       drumrollAudio.currentTime = 0;
       drumrollAudio.play();
 
@@ -90,12 +81,15 @@
         mainImage.alt = "GIRL!";
         startBtn.style.display = 'none';
 
-        // メッセージ表示
-        message.style.display = 'block';
-
-        // BGM停止（必要なら）
-        // drumrollAudio.pause();
-        // drumrollAudio.currentTime = 0;
+        // メッセージ要素を動的に作成して追加
+        const message = document.createElement('p');
+        message.textContent = 'おめでとうございます！\n女の子です！';
+        message.style.marginTop = '20px';
+        message.style.fontSize = '1.2em';
+        message.style.fontWeight = 'bold';
+        message.style.color = '#e91e63';
+        message.style.whiteSpace = 'pre-line'; // \nで改行表示
+        mainImage.insertAdjacentElement('afterend', message);
       }, 5800);
     });
   </script>
